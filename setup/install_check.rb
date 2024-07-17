@@ -15,6 +15,8 @@ def prepare_gemfile
   new_gems = File.read('./setup/Gemfile.new')
 
   content << "\n" unless content.end_with?("\n")
+  content << 'gem "graphiti-rails"'
+  content << "\n" unless content.end_with?("\n")
 
   content << new_gems
 
