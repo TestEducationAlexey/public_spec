@@ -14,8 +14,11 @@ def prepare_gemfile
   content.gsub!(/^gem\s+["'](rspec.*|.*spec|faker.*)["'].*\n/, '')
   new_gems = File.read('./setup/Gemfile.new')
 
-  content << "\n" unless content.end_with?("\n")
-  content << 'gem "graphiti-rails"'
+  unless content.match?(/gem\s+["']graphiti-rails["'](\s*,\s*["'][^"']*["'])?(\s*,\s*:[\w]+ => [^,]+)?/)
+    content << "\n" unless content.end_with?("\n")
+    content << "gem 'graphiti-rails'\n"
+  end
+
   content << "\n" unless content.end_with?("\n")
 
   content << new_gems
