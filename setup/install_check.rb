@@ -25,7 +25,7 @@ FileUtils.chdir APP_ROOT do
   puts "== Update gemfile =="
   prepare_gemfile
 
-  # puts "== Installing dependencies =="
-  # system! "gem install bundler --conservative"
-  # system!("bundle install")
+  puts "== Installing dependencies =="
+  system! "gem install bundler --conservative"
+  system!("bundle install")
 end
