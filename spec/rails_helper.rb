@@ -52,6 +52,18 @@ RSpec.configure do |config|
     DatabaseCleaner.clean_with(:truncation)
   end
 
+  config.after(:suite) do
+    results_store = PStore.new("test_results.pstore")
+    results_store.transaction do
+      group = ENV["SPEC_GROUP"].to_sym
+      group_data = results_store[group] || {total: 0, failed: 0, passed: 0}
+      group_data[:total] = RSpec.world.example_count
+      group_data[:failed] = RSpec.world.filtered_examples.values.flatten.count(&:exception)
+      group_data[:passed] = group_data[:total] - group_data[:failed]
+      results_store[group] = group_data
+    end
+  end
+
   config.around(:each) do |example|
     begin
       CASE_STRIO.reopen
