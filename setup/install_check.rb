@@ -27,5 +27,5 @@ FileUtils.chdir APP_ROOT do
 
   puts "== Installing dependencies =="
   system! "gem install bundler --conservative"
-  system!("bundle install")
+  system!("bundle install --quiet")
 end
