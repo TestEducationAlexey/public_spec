@@ -41,7 +41,7 @@ RSpec.describe "shops#update", type: :request do
     let(:new_name) { "" }
     let(:expected_error) {
       {
-        code: "unprocessable_entity",
+        code: "unprocessable_content",
         status: "422",
         title: "Validation Error",
         detail: "Name can't be blank",
@@ -56,7 +56,7 @@ RSpec.describe "shops#update", type: :request do
       make_request
 
       aggregate_failures "testing response" do
-        expect(response).to have_http_status(:unprocessable_entity)
+        expect(response).to have_http_status(:unprocessable_content)
         expect(json_body[:errors].first).to include(expected_error)
       end
     end
@@ -67,7 +67,7 @@ RSpec.describe "shops#update", type: :request do
 
     let(:expected_error) {
       {
-        code: "unprocessable_entity",
+        code: "unprocessable_content",
         status: "422",
         title: "Validation Error",
         detail: "Name has already been taken",
@@ -82,7 +82,7 @@ RSpec.describe "shops#update", type: :request do
       make_request
 
       aggregate_failures "testing response" do
-        expect(response).to have_http_status(:unprocessable_entity)
+        expect(response).to have_http_status(:unprocessable_content)
         expect(json_body[:errors].first).to include(expected_error)
       end
     end

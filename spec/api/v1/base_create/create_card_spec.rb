@@ -39,7 +39,7 @@ RSpec.describe "shops#create", type: :request do
 
     before { make_request }
 
-    it("return unprocessable_entity status") { expect(response).to have_http_status(:unprocessable_entity) }
+    it("return unprocessable_content status") { expect(response).to have_http_status(:unprocessable_content) }
     it("doesn't success") { expect(json_body).to include(success: false) }
     it("returns error") { expect(json_body).to include(errors: hash_including(amount: ["must be greater than 0"])) }
   end
@@ -47,7 +47,7 @@ RSpec.describe "shops#create", type: :request do
   context "when user_id is blank" do
     before { buy(shop_id: shop[:id], user_id: nil, amount: amount, use_bonuses: use_bonuses) }
 
-    it("return unprocessable_entity status") { expect(response).to have_http_status(:unprocessable_entity) }
+    it("return unprocessable_content status") { expect(response).to have_http_status(:unprocessable_content) }
     it("doesn't success") { expect(json_body).to include(success: false) }
     it("returns error") { expect(json_body).to include(errors: hash_including(user_id: ["is required"])) }
   end
@@ -55,7 +55,7 @@ RSpec.describe "shops#create", type: :request do
   context "when amount is blank" do
     before { buy(shop_id: shop[:id], user_id: user[:id], amount: nil, use_bonuses: use_bonuses) }
 
-    it("return unprocessable_entity status") { expect(response).to have_http_status(:unprocessable_entity) }
+    it("return unprocessable_content status") { expect(response).to have_http_status(:unprocessable_content) }
     it("doesn't success") { expect(json_body).to include(success: false) }
     it("returns error") { expect(json_body).to include(errors: hash_including(amount: ["is required"])) }
   end

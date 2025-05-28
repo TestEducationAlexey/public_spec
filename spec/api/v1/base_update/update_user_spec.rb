@@ -41,7 +41,7 @@ RSpec.describe "users#update", type: :request do
     let(:new_email) { "" }
     let(:expected_error) {
       {
-        code: "unprocessable_entity",
+        code: "unprocessable_content",
         status: "422",
         title: "Validation Error",
         detail: "Email can't be blank",
@@ -55,7 +55,7 @@ RSpec.describe "users#update", type: :request do
     it 'return jsonapi error' do
       make_request
 
-      expect(response).to have_http_status(:unprocessable_entity)
+      expect(response).to have_http_status(:unprocessable_content)
       expect(json_body[:errors].first).to include(expected_error)
     end
   end
@@ -65,7 +65,7 @@ RSpec.describe "users#update", type: :request do
 
     let(:expected_error) {
       {
-        code: "unprocessable_entity",
+        code: "unprocessable_content",
         status: "422",
         title: "Validation Error",
         detail: "Email has already been taken",
@@ -79,7 +79,7 @@ RSpec.describe "users#update", type: :request do
     it 'return jsonapi error' do
       make_request
 
-      expect(response).to have_http_status(:unprocessable_entity)
+      expect(response).to have_http_status(:unprocessable_content)
       expect(json_body[:errors].first).to include(expected_error)
     end
   end
