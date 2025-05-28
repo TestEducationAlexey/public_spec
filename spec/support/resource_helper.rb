@@ -81,6 +81,23 @@ module ResourceHelper
   end
 
   def log_response(counter = nil)
+    log_status(counter)
+    log_body(counter)
+  end
+
+  def log_status(counter = nil)
+    message = if counter
+                "Response body for #{counter.ordinalize} operation:\n"
+              else
+                "Response body:\n"
+              end.magenta
+
+    message << response.status.ai
+
+    RSPEC_LOGGER.debug(message)
+  end
+
+  def log_body(counter = nil)
     message = if counter
                 "Response body for #{counter.ordinalize} operation:\n"
               else
