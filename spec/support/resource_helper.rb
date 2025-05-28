@@ -87,9 +87,9 @@ module ResourceHelper
 
   def log_status(counter = nil)
     message = if counter
-                "Response body for #{counter.ordinalize} operation:\n"
+                "Response status for #{counter.ordinalize} operation:\n"
               else
-                "Response body:\n"
+                "Response status:\n"
               end.magenta
 
     message << response.status.ai
